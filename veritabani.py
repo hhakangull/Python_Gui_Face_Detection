@@ -1,6 +1,6 @@
 import sqlite3
-from PyQt5.QtWidgets import QTableWidgetItem,QMessageBox
-from PyQt5.QtWidgets import QTableWidget
+
+from PyQt5.QtWidgets import QTableWidgetItem
 
 
 class Kisi():

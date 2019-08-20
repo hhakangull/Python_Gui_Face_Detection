@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 # import  PyQt5 modüller
+import datetime
+import glob
+import os
+
+import cv2
+from PyQt5.QtGui import QPixmap
 from PyQt5.QtCore import QTimer
-from PyQt5.QtGui import QPixmap, QImage
-from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtGui import QImage
+from PyQt5.QtWidgets import QApplication
+import kayit
+from data import *
+from kisiler import *
 from ui_pages.ui_main import *
 from veritabani import Sirket
-from kisiler import *
-from data import *
-import cv2
-import datetime
-import kayit
-
-import glob, os
+import time
 
 # Kaynak Dosya Yollarını Belirlemek için Bunlar 0 - 1 -2 -3 -4 diye gidebilir kameralara bağlı olarak
 source1 = 0  # "videolar/video1.mp4"  # 0
-source2 = "videolar/video1.mp4"
-source3 = "videolar/video1.mp4"  # 6
-source4 = "videolar/video1.mp4"
+source2 = 0  # "videolar/video1.mp4"
+source3 = 0  # "videolar/video1.mp4"  # 6
+source4 = 0  # "videolar/video1.mp4"
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 
@@ -32,31 +35,35 @@ class MainWindow(QWidget):
 		self.sirket = Sirket()
 		self.sirket.kayitlariGoster(self.ui)
 		# create a timer kamerayı açmak için lazım olan timer fonksiyonları
-		self.timer = QTimer()
+		# self.timer = QTimer()
 		self.timer2 = QTimer()
-		self.timer3 = QTimer()
-		self.timer4 = QTimer()
+		# self.timer3 = QTimer()
+		# self.timer4 = QTimer()
 		# set timer timeout callback function
 		self.camKontrol = False
-		self.timer.timeout.connect(self.viewCam)
+		# self.timer.timeout.connect(self.viewCam)
 		self.timer2.timeout.connect(self.viewCam2)
-		self.timer3.timeout.connect(self.viewCam3)
-		self.timer4.timeout.connect(self.viewCam4)
+		# self.timer3.timeout.connect(self.viewCam3)
+		# self.timer4.timeout.connect(self.viewCam4)
 		# butonlara basıldığında yapması gereken işlemlerin olduğu kısım
 		self.ui.control_bt.clicked.connect(self.controlTimer)
-		self.ui.pushButton.clicked.connect(self.getir)
 		# self.ui.control_bt_2.clicked.connect(self.duzelt)
 		self.ui.btnKisiler.clicked.connect(self.kisilerWindow)
 		self.ui.btnKayit.clicked.connect(self.dataWindow)
 		self.ui.btnKisiEkle.clicked.connect(self.kayitWindow)
 		self.gonder = None
 		self.ui.image_label.setText("Kamera 1")
-		self.ui.image_label_2.setText("Kamera 2")
-		self.ui.image_label_3.setText("Kamera 3")
-		self.ui.image_label_4.setText("Kamera 4")
 		self.last_img_fname = "0"
-		self.ui.control_bt_2.clicked.connect(self.dosyaOlustur)
 		self.kontrolList = list()
+		self.tt_opencvDnn = 0
+		self.frame_count = 0
+		self.modelFile = "models/opencv_face_detector_uint8.pb"
+		self.configFile = "models/opencv_face_detector.pbtxt"
+		self.net = cv2.dnn.readNetFromTensorflow(self.modelFile, self.configFile)
+		self.label = None
+		self.fpsDnn = None
+		self.iconKontrol = False
+		self.icon = QtGui.QIcon()
 
 	def viewCam(self):
 		# # read image in BGR format
@@ -131,9 +138,9 @@ class MainWindow(QWidget):
 		tarih = str(datetime.datetime.strftime(self.tarih, '%x'))
 		saat = str(datetime.datetime.strftime(self.saat, '%X'))
 		if (kisi.durum == "izinli"):
-			self.ui.lbl_izinsiz.hide()
+			pass
 		else:
-			self.ui.lbl_izinli.hide()
+			pass
 		self.ui.lbl_ID.setText(kisi.id)
 		giris = "Giriş"
 		if isim not in self.kontrolList:
@@ -177,17 +184,54 @@ class MainWindow(QWidget):
 	# view camera 2
 	def viewCam2(self):
 		# read image in BGR format
+		t = time.time()
 		ret, image = self.cap2.read()
+
+		outOpencvDnn, bboxes = self.detectFaceOpenCVDnn(self.net, image)
+
 		# convert image to RGB format
-		image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+		# image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+		outOpencvDnn = cv2.cvtColor(outOpencvDnn, cv2.COLOR_BGR2RGB)
 		# get image infos
-		height, width, channel = image.shape
+		height, width, channel = outOpencvDnn.shape
 		step = channel * width
+
 		# create QImage from image
-		qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
+		# qImg = QImage(image.data, width, height, step, QImage.Format_RGB888)
+		qImg = QImage(outOpencvDnn.data, width, height, step, QImage.Format_RGB888)
 		# show image in img_label
-		self.ui.image_label_2.setPixmap(QPixmap.fromImage(qImg))
-		self.ui.image_label_2.setScaledContents(True)
+		self.frame_count += 1
+		self.tt_opencvDnn += time.time() - t
+		self.fpsDnn = self.frame_count / self.tt_opencvDnn
+		self.fpsDnn = int(self.fpsDnn)
+		self.label = "FPS : {}".format(self.fpsDnn)
+		print(self.fpsDnn)
+		self.ui.image_label.setPixmap(QPixmap.fromImage(qImg))
+		self.ui.image_label.setScaledContents(True)
+
+	def detectFaceOpenCVDnn(self, net, frame):
+
+		conf_threshold = 0.5
+		frameOpencvDnn = frame.copy()
+
+		frameHeight = frameOpencvDnn.shape[0]
+		frameWidth = frameOpencvDnn.shape[1]
+		blob = cv2.dnn.blobFromImage(frameOpencvDnn, 1.0, (300, 300), [104, 117, 123], False, False)
+
+		net.setInput(blob)
+		detections = net.forward()
+		bboxes = []
+		for i in range(detections.shape[2]):
+			confidence = detections[0, 0, i, 2]
+			if confidence > conf_threshold:
+				x1 = int(detections[0, 0, i, 3] * frameWidth)
+				y1 = int(detections[0, 0, i, 4] * frameHeight)
+				x2 = int(detections[0, 0, i, 5] * frameWidth)
+				y2 = int(detections[0, 0, i, 6] * frameHeight)
+				bboxes.append([x1, y1, x2, y2])
+				cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
+		return frameOpencvDnn, bboxes
 
 	# view camera 3
 	def viewCam3(self):
@@ -223,38 +267,27 @@ class MainWindow(QWidget):
 
 	# start/stop timer
 	def controlTimer(self):
-
 		# if timer is stopped
-		if not (self.timer.isActive() or self.timer2.isActive() or self.timer3.isActive()):
+		if not (self.timer2.isActive()):
 			# create video capture
-			self.cap = cv2.VideoCapture(source1)
-			# self.cap2=cv2.VideoCapture(source2)
-			# self.cap3=cv2.VideoCapture(source3)
-			# self.cap4=cv2.VideoCapture(source4)
-			# start timer
-			self.timer.start()
-			# self.timer2.start()
-			# self.timer3.start()
-			# self.timer4.start()
+			self.cap2 = cv2.VideoCapture(source2)
+
+			self.timer2.start()
+
 			self.camKontrol = True
-			# update control_bt text
-			self.ui.control_bt.setText("Stop")
+
+			self.iconDegis()
+			self.iconKontrol = True
 			self.getir()
 		# if timer is started
 		else:
-			# stop timer
-			self.timer.stop()
-			# self.timer2.stop()
-			# self.timer3.stop()
-			# self.timer4.stop()
-			# release video capture
-			self.cap.release()
-			# self.cap2.release()
-			# self.cap3.release()
-			# self.cap4.release()
-			# update control_bt text
-			self.ui.control_bt.setText("Start")
+			self.timer2.stop()
+			self.cap2.release()
+			self.iconDegis()
+			self.iconKontrol = False
 
+
+	# veri aktarımı için çok da gerekli değil
 	def renkDegis(self, kontrol):
 		durumx = kontrol
 		self.durum = durumx
@@ -262,22 +295,19 @@ class MainWindow(QWidget):
 			self.ui.control_bt_2.setStyleSheet("background-color: rgb(52, 101, 164);")
 			durumx = "False"
 
-	def duzelt(self):
-		self.ui.control_bt_2.setStyleSheet("")
-
-	def x(self):
-		x = self.ui.tableWidget.cellClicked()
-		print(x)
-
-	def resimOku(self):
-		pass
-
+	def iconDegis(self):
+		if self.iconKontrol == False:
+			self.icon.addPixmap(QtGui.QPixmap("resimler/stop.png"))
+			self.ui.control_bt.setIcon(self.icon)
+			self.ui.control_bt.setIconSize(QtCore.QSize(80, 80))
+		else:
+			self.icon.addPixmap(QtGui.QPixmap("resimler/start.png"))
+			self.ui.control_bt.setIcon(self.icon)
+			self.ui.control_bt.setIconSize(QtCore.QSize(80, 80))
 
 if __name__ == '__main__':
 	import sys
-
 	app = QApplication(sys.argv)
-	# create and show mainWindow
 	mainWindow = MainWindow()
 	mainWindow.show()
 	sys.exit(app.exec_())

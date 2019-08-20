@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1468</width>
-    <height>769</height>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -52,14 +52,19 @@
     <widget class="QLabel" name="labelid">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>80</y>
-       <width>67</width>
-       <height>17</height>
+       <x>110</x>
+       <y>100</y>
+       <width>70</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>ID :</string>
@@ -68,14 +73,19 @@
     <widget class="QLabel" name="labelAdSoyad">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>20</y>
-       <width>71</width>
-       <height>17</height>
+       <x>110</x>
+       <y>10</y>
+       <width>101</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Ad Soyad :</string>
@@ -84,46 +94,61 @@
     <widget class="QLabel" name="labelizin">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>60</y>
-       <width>91</width>
-       <height>17</height>
+       <x>110</x>
+       <y>70</y>
+       <width>121</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
-      <string>İzin Durumu</string>
+      <string>İzin Durumu :</string>
      </property>
     </widget>
     <widget class="QLabel" name="labelGirisCikis">
      <property name="geometry">
       <rect>
-       <x>140</x>
+       <x>110</x>
        <y>40</y>
-       <width>91</width>
-       <height>17</height>
+       <width>111</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Giris / Cikis :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Giriş / Çıkış :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
     <widget class="QLabel" name="lbl_AdSoyad">
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>20</y>
-       <width>131</width>
-       <height>17</height>
+       <y>10</y>
+       <width>141</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Ad Soyadi</string>
@@ -136,13 +161,19 @@
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>60</y>
-       <width>40</width>
-       <height>17</height>
+       <y>70</y>
+       <width>101</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true">color: rgb(115, 210, 22);</string>
+      <string notr="true">color: rgb(0, 170, 0);
+</string>
      </property>
      <property name="text">
       <string>İzinli</string>
@@ -153,12 +184,17 @@
       <rect>
        <x>250</x>
        <y>40</y>
-       <width>50</width>
-       <height>17</height>
+       <width>70</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Giriş</string>
@@ -168,48 +204,21 @@
      <property name="geometry">
       <rect>
        <x>250</x>
-       <y>80</y>
-       <width>90</width>
-       <height>17</height>
+       <y>100</y>
+       <width>111</width>
+       <height>30</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Id Numarasi</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lbl_izinsiz">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>60</y>
-       <width>40</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: rgb(204, 0, 0);</string>
-     </property>
-     <property name="text">
-      <string>İzinsiz</string>
-     </property>
-    </widget>
-    <widget class="QLabel" name="lblCikis">
-     <property name="geometry">
-      <rect>
-       <x>250</x>
-       <y>40</y>
-       <width>50</width>
-       <height>17</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Çıkış</string>
      </property>
     </widget>
     <widget class="QPushButton" name="btnKisiler">
@@ -228,14 +237,14 @@
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">border:0px</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../resimler/images.png</normaloff>../resimler/images.png</iconset>
+       <normaloff>resimler/images.png</normaloff>resimler/images.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -259,12 +268,15 @@
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border:0px</string>
+     </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../resimler/add-user.png</normaloff>../resimler/add-user.png</iconset>
+       <normaloff>resimler/add-user.png</normaloff>resimler/add-user.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -277,15 +289,18 @@
      <property name="geometry">
       <rect>
        <x>1180</x>
-       <y>105</y>
+       <y>97</y>
        <width>70</width>
-       <height>20</height>
+       <height>31</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <pointsize>14</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Kişiler</string>
@@ -298,15 +313,18 @@
      <property name="geometry">
       <rect>
        <x>1280</x>
-       <y>105</y>
+       <y>97</y>
        <width>70</width>
-       <height>20</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
       <font>
        <pointsize>14</pointsize>
       </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string>Kayıtlar</string>
@@ -319,9 +337,9 @@
      <property name="geometry">
       <rect>
        <x>1380</x>
-       <y>105</y>
+       <y>97</y>
        <width>70</width>
-       <height>20</height>
+       <height>30</height>
       </rect>
      </property>
      <property name="font">
@@ -329,8 +347,11 @@
        <pointsize>14</pointsize>
       </font>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
+     </property>
      <property name="text">
-      <string>Ayarlar</string>
+      <string>Kişi Ekle</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -351,12 +372,15 @@
      <property name="autoFillBackground">
       <bool>false</bool>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border:0px</string>
+     </property>
      <property name="text">
       <string/>
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../resimler/kayit2.png</normaloff>../resimler/kayit2.png</iconset>
+       <normaloff>resimler/kayit2.png</normaloff>resimler/kayit2.png</iconset>
      </property>
      <property name="iconSize">
       <size>
@@ -378,13 +402,13 @@
       <bool>false</bool>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap>../resimler/personReal.png</pixmap>
+      <pixmap>resimler/personReal.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -393,59 +417,55 @@
       <cstring>btnKisiler</cstring>
      </property>
     </widget>
-    <widget class="QPushButton" name="control_bt_2">
-     <property name="geometry">
-      <rect>
-       <x>1010</x>
-       <y>20</y>
-       <width>141</width>
-       <height>80</height>
-      </rect>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="text">
-      <string>Veritabanı Güncelle</string>
-     </property>
-    </widget>
     <widget class="QPushButton" name="control_bt">
      <property name="geometry">
       <rect>
-       <x>900</x>
+       <x>1075</x>
        <y>20</y>
        <width>80</width>
        <height>80</height>
       </rect>
      </property>
+     <property name="styleSheet">
+      <string notr="true">border:0px
+</string>
+     </property>
      <property name="text">
-      <string>Start</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>resimler/start.png</normaloff>resimler/start.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>80</width>
+       <height>80</height>
+      </size>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QLabel" name="label_kisiler_2">
      <property name="geometry">
       <rect>
-       <x>400</x>
-       <y>30</y>
-       <width>71</width>
-       <height>61</height>
+       <x>1080</x>
+       <y>97</y>
+       <width>70</width>
+       <height>31</height>
       </rect>
      </property>
-     <property name="text">
-      <string>1</string>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
      </property>
-    </widget>
-    <widget class="QPushButton" name="pushButton_2">
-     <property name="geometry">
-      <rect>
-       <x>480</x>
-       <y>30</y>
-       <width>71</width>
-       <height>61</height>
-      </rect>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgba(0,0,0,0%)</string>
      </property>
      <property name="text">
-      <string>2</string>
+      <string>Başlat</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
      </property>
     </widget>
     <zorder>labelid</zorder>
@@ -454,8 +474,6 @@
     <zorder>labelGirisCikis</zorder>
     <zorder>lbl_AdSoyad</zorder>
     <zorder>lbl_ID</zorder>
-    <zorder>lbl_izinsiz</zorder>
-    <zorder>lblCikis</zorder>
     <zorder>btnKisiler</zorder>
     <zorder>btnKisiEkle</zorder>
     <zorder>label_kisiler</zorder>
@@ -463,12 +481,10 @@
     <zorder>label_kisiEkle</zorder>
     <zorder>btnKayit</zorder>
     <zorder>lblProfilFoto</zorder>
-    <zorder>control_bt_2</zorder>
     <zorder>control_bt</zorder>
-    <zorder>pushButton</zorder>
-    <zorder>pushButton_2</zorder>
     <zorder>lbl_izinli</zorder>
     <zorder>lblGiris</zorder>
+    <zorder>label_kisiler_2</zorder>
    </widget>
    <widget class="QFrame" name="altFrame">
     <property name="geometry">
@@ -505,8 +521,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>400</width>
-        <height>314</height>
+        <width>800</width>
+        <height>628</height>
        </rect>
       </property>
       <property name="layoutDirection">
@@ -514,63 +530,6 @@
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: rgb(85, 87, 83);</string>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="image_label_2">
-      <property name="geometry">
-       <rect>
-        <x>400</x>
-        <y>0</y>
-        <width>400</width>
-        <height>314</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(85, 87, 83);</string>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="image_label_3">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>314</y>
-        <width>400</width>
-        <height>314</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(136, 138, 133);</string>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="image_label_4">
-      <property name="geometry">
-       <rect>
-        <x>400</x>
-        <y>314</y>
-        <width>400</width>
-        <height>314</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">background-color: rgb(136, 138, 133);</string>
       </property>
       <property name="text">
        <string>TextLabel</string>
@@ -658,13 +617,8 @@
   <tabstop>btnKisiler</tabstop>
   <tabstop>btnKayit</tabstop>
   <tabstop>btnKisiEkle</tabstop>
-  <tabstop>pushButton</tabstop>
-  <tabstop>control_bt_2</tabstop>
-  <tabstop>pushButton_2</tabstop>
   <tabstop>tableWidget</tabstop>
  </tabstops>
- <resources>
-  <include location="resimler.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

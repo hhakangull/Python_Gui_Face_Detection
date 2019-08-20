@@ -1,12 +1,12 @@
+import os
+
 import cv2
-from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.QtCore import QTimer
+from PyQt5.QtGui import QPixmap, QImage
+from PyQt5.QtWidgets import QWidget, QMessageBox
+
 from ui_pages.ui_kayit import *
 from veritabani import *
-import cv2
-import os
-from PyQt5.QtWidgets import QWidget, QMessageBox
-import time
 
 
 class KayitMainWindow(QWidget):
