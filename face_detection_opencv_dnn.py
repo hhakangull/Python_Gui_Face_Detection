@@ -3,8 +3,8 @@ import cv2
 import time
 import sys
 
-def detectFaceOpenCVDnn(net, frame):
 
+def detectFaceOpenCVDnn(net, frame):
     conf_threshold = 0.5
     frameOpencvDnn = frame.copy()
 
@@ -23,8 +23,10 @@ def detectFaceOpenCVDnn(net, frame):
             x2 = int(detections[0, 0, i, 5] * frameWidth)
             y2 = int(detections[0, 0, i, 6] * frameHeight)
             bboxes.append([x1, y1, x2, y2])
-            cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight/150)), 8)
+            cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
     return frameOpencvDnn, bboxes
+
+
 def main():
     source = 0
     DNN = "TF"
@@ -45,13 +47,12 @@ def main():
         vid_writer = cv2.VideoWriter('output-dnn-{}.avi'.format(str(source).split(".")[0]),
                                      cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), 15, (frame.shape[1], frame.shape[0]))
 
-       # frame_count = 0
-        #tt_opencvDnn = 0
+        frame_count = 0
+        tt_opencvDnn = 0
         while (1):
             hasFrame, frame = cap.read()
             if not hasFrame:
                 break
-
 
             t = time.time()
             outOpencvDnn, bboxes = detectFaceOpenCVDnn(net, frame)
@@ -71,13 +72,12 @@ def main():
                 break
         cv2.destroyAllWindows()
         vid_writer.release()
-if __name__ == "__main__" :
+
+
+if __name__ == "__main__":
     main()
     # OpenCV DNN supports 2 networks.
     # 1. FP16 version of the original caffe implementation ( 5.4 MB )
     # 2. 8 bit Quantized version using Tensorflow ( 2.7 MB )
 
-
-
-    #source = "videos/neck-exercise.mp4"
-
+    # source = "videos/neck-exercise.mp4"
